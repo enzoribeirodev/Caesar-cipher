@@ -1,4 +1,4 @@
-from string import ascii_lowercase as alphabet
+from string import ascii_lowercase
 
 
 def caesar_cipher(msg: str, turns: int, encode: bool = True) -> str:
@@ -28,4 +28,5 @@ def caesar_cipher(msg: str, turns: int, encode: bool = True) -> str:
             result.append(char)
 
     return "".join(result)
+
 
