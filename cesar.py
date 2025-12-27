@@ -1,25 +1,31 @@
 from string import ascii_lowercase as alphabet
 
 
-def cesar(msg: str, turns: int, encode: bool) -> str:
-    encrypted_word = ""
-    encrypted_words = []
+def caesar_cipher(msg: str, turns: int, encode: bool = True) -> str:
+    """
+    Encodes or decodes a string using the Caesar cipher method.
+    
+    Args:
+        msg (str): The message to be processed.
+        turns (int): The number of positions to shift.
+        encode (bool): If True, encodes the message. If False, decodes it.
+    
+    Returns:
+        str: The processed message.
+    """
+    result = []
+    
+    shift = turns if encode else -turns
+    
+    for char in msg:
+        if char in ascii_lowercase:
+            current_index = ascii_lowercase.index(char)
+            
+            new_index = (current_index + shift) % 26
+            
+            result.append(ascii_lowercase[new_index])
+        else:
+            result.append(char)
 
-    words_to_be_encrypted = msg.split()
-    for word in words_to_be_encrypted:
-        for letter in word:
-            if encode:
-                new_index = alphabet.find(letter) + turns
-                new_letter = alphabet[new_index if new_index <= 26 else new_index - 26]
-            else:
-                new_index = alphabet.find(letter) - turns
-                new_letter = alphabet[new_index if new_index <= 26 else new_index + 26]
+    return "".join(result)
 
-            encrypted_word += new_letter
-
-        encrypted_words.append(encrypted_word)
-        encrypted_word = ""
-
-    encrypted_msg = " ".join(encrypted_words)
-
-    return encrypted_msg
